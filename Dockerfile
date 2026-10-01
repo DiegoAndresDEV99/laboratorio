@@ -1,39 +1,14 @@
-# 1. Traer una imagen oficial de Node.js (versión ligera) como base
-
+# Usa una imagen base oficial de Node.js (sistema ligero alpine)
 FROM node:18-alpine
-
- 
-
-# 2. Crear y usar una carpeta dentro del contenedor para nuestra app
-
-WORKDIR /usr/src/app
-
- 
-
-# 3. Copiar el archivo package.json para instalar las dependencias
-
+# Define la carpeta de trabajo dentro del contenedor
+WORKDIR /app
+# Copia el archivo de configuración de dependencias
 COPY package*.json ./
-
- 
-
-# 4. Instalar Express dentro del contenedor
-
+# Instala las dependencias necesarias dentro del contenedor
 RUN npm install
-
- 
-
-# 5. Copiar el resto de nuestro código (el archivo server.js) al contenedor
-
+# Copia todo nuestro código fuente
 COPY . .
-
- 
-
-# 6. Informar que el contenedor usará internamente el puerto 3000
-
+# Expone el puerto que usa la app
 EXPOSE 3000
-
- 
-
-# 7. El comando que arranca nuestra aplicación web
-
+# Comando para arrancar el servidor
 CMD ["npm", "start"]
